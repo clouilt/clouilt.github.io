@@ -1,6 +1,41 @@
 <html>
-<body>
-	<a href='./page.html'>to page</a>
+	<head>
+		<script type="text/javascript" src="./js/jquery-3.2.1.min.js">
+		</script>
 
-</body>
+		<script type="text/javascript">
+			var AJAXFILEDIR = "data/"			
+	
+			function getAnchor(){
+				return window.location.hash.substr(1);
+			}
+
+			function getAjaxUrl(){
+				return AJAXFILEDIR + getAnchor();
+			}
+
+			function refresh(){
+				instRefresh();
+			}
+
+			function instRefresh(){
+				var ajaxurl = getAjaxUrl();
+				var ajaxdata  = $.ajax({url:ajaxurl, async:false});
+				$("#box").html(ajaxdata.responseText);
+			}
+
+			function afterReady(){
+				instRefresh();
+			}
+			$(document).ready(afterReady);
+
+		</script>
+	</head>
+	<body>
+		<a href='#data1' onclick='refresh()'>data 1</a>
+		<a href='#data2' onclick='refresh()'>data 2</a>
+		<a href='#data3'>data 3</a>
+
+		<div id='box'> </div>
+	</body>
 </html>
