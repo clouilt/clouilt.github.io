@@ -3,6 +3,9 @@
 		<script type="text/javascript" src="./js/jquery-3.2.1.min.js">
 		</script>
 
+		<script type="text/javascript" src="./js/markdown.min.js">
+		</script>
+
 		<script type="text/javascript">
 			var AJAXFILEDIR = "data/";
 	
@@ -16,13 +19,18 @@
 				return AJAXFILEDIR + x;
 			}
 
-			function refresh(x){
+			function refreshUsing(x, f){
 				if ( x === '' ){
 					return;
 				}
 				var ajaxuri   = getAjaxUri(x);
 				var ajaxdata  = $.ajax({url:ajaxuri, async:false});
-				$("#box").html(ajaxdata.responseText);
+				var htmlcontent = f(ajaxdata.responseText);
+				$("#box").html(htmlcontent);
+			}
+
+			function refresh(x){
+				refreshUsing(x, function (x){return markdown.toHTML(x);});
 			}
 
 			function anchorRefresh(){
