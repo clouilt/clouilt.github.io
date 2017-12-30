@@ -6,8 +6,11 @@
 		<script type="text/javascript" src="./js/markdown.min.js">
 		</script>
 
+		<link rel="stylesheet" href="css/w3.css">
+
 		<script type="text/javascript">
 			var AJAXFILEDIR = "data/";
+			$.ajaxSetup({ cache: false });
 	
 			function getAnchor(){
 				return window.location.hash.substr(1);
@@ -29,8 +32,12 @@
 				$("#box").html(htmlcontent);
 			}
 
+			function idfunc(x){
+				return x;
+			}
+
 			function refresh(x){
-				refreshUsing(x, function (x){return markdown.toHTML(x);});
+				refreshUsing(x, idfunc);
 			}
 
 			function anchorRefresh(){
@@ -50,9 +57,11 @@
 		</script>
 	</head>
 	<body>
-		<a href='#data1'>data 1</a>
-		<a href='#data2'>data 2</a>
-		<a href='#data3'>data 3</a>
+		<div class="w3-bar w3-black" id="navbar">
+			<a class="w3-bar-item w3-button" href='#data1'>data 1</a>
+			<a class="w3-bar-item w3-button" href='#data2'>data 2</a>
+			<a class="w3-bar-item w3-button" href='#data3'>data 3</a>
+		</div>
 
 		<div id='box'> </div>
 	</body>

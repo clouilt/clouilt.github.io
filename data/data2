@@ -1,1 +1,29 @@
-<p>data 2</p>
+<script type="text/javascript">
+	lst = ['<h1 class="w3-center w3-animate-right">click count: ']
+	cnt = 0;
+	function clickfunc(){
+		$("#main").html(lst[0] + cnt + '</h1>');
+		cnt = cnt + 1;
+		
+	}
+</script>
+
+<style type="text/css">
+	.test {
+		width: 1366px;
+		height: 768px;
+		margin: auto;
+	}
+
+	.test div{
+		position: relative;
+		top:50%;
+		transform: translateY(-50%);
+	}
+</style>
+
+<div class="w3-card w3-blue test" onclick="clickfunc()">
+<div id="main">
+  <h1 class="w3-center w3-animate-right">click me</h1>
+  </div>
+</div>
