@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	function clickfunc(){
+		initColor();
+		$("#main").html(getAvatar());
+	}
+
+	function isBlack(x, y){
+		if (x > 2)
+			return black[4-x][y];
+		return black[x][y]
+	}
+
+	var black=[];
+	function initColor(){
+		black = [];
+		var tmp = [];
+		for(var j = 0; j<3 ; ++j){
+			tmp = [];
+			for(var i = 0; i<5 ; ++i)
+				if(Math.random() > 0.5)
+					tmp.push(0);
+				else
+					tmp.push(1);
+			black.push(tmp.slice(0));
+		}
+	}
+
+	var svgPre = ' <div class=""> <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="200" width="200"> <symbol id="r0"> <rect width="20%" height="20%" style="fill:rgb(19,2,73);stroke=width:0;" /> </symbol> <symbol id="r1"> <rect width="20%" height="20%" style="fill:rgb(255,255,255);stroke=width:0;" /> </symbol>'
+	var svgPost = "</svg></div>"
+
+	function getElem(x, y){
+		return '<use xlink:href="#r' + isBlack(x, y) + '" x="' + 20 * x + '%" y="' + 20 * y + '%" />'
+	}
+	function getAvatar(){
+		var res = svgPre;
+		for(var x = 0; x < 5; ++x){
+			for(var y = 0; y< 5; ++y){
+				res = res + getElem(x, y);
+			}
+		}
+		res = res + svgPost;
+		return res;
+	}
+</script>
+
+<style type="text/css">
+	.test {
+		width:  800px;
+		height: 600px;
+		margin: auto;
+	}
+
+	#main {
+		position: relative;
+		top:50%;
+		transform: translateY(-50%);
+	}
+
+	.my {
+		-webkit-margin-before:0;
+		-webkit-margin-after :0;
+	}
+</style>
+<div class="w3-card w3-white test" onclick="clickfunc()">
+<div id="main" class="w3-center">
+<div class="w3-animate-right">
+<h1 class="my"> click me </h1>
+</div>
+</div>
+</div>

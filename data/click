@@ -10,8 +10,8 @@
 
 <style type="text/css">
 	.test {
-		width: 1366px;
-		height: 768px;
+		width:  800px;
+		height: 600px;
 		margin: auto;
 	}
 
