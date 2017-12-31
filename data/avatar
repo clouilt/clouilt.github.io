@@ -44,7 +44,7 @@
 		}
 	}
 
-	var svgPre = ' <div id="inner" class="w3-card-4"> <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="200" width="200"> <symbol id="r0"> <rect width="40" height="40" style="fill:rgb(19,2,73);stroke-width:0;stroke:rgb(19,2,73);" /> </symbol> <symbol id="r1"> <rect width="40" height="40" style="fill:rgb(255,255,255);stroke-width:0;stroke:rgb(0,0,0)" /> </symbol>'
+	var svgPre = ' <div id="inner" class="w3-card-4"> <svg xmlns="http://www.w3.org/2000/svg" version="1.1"  width="100%" viewBox="0,0,200,200"> <symbol id="r0"> <rect width="40" height="40" style="fill:rgb(19,2,73);stroke-width:0;stroke:rgb(19,2,73);" /> </symbol> <symbol id="r1"> <rect width="40" height="40" style="fill:rgb(255,255,255);stroke-width:0;stroke:rgb(0,0,0)" /> </symbol>'
 	var svgPost = '</svg></div><br /><br /><div class="w3-card-4 w3-button" onclick="clickfunc()">Go!</div>  <div class="w3-card-4 w3-button" onclick="save()">Save</div>'
 
 	function getElem(x, y){
