@@ -1,7 +1,9 @@
 *
-!/*.html
-!/*.css
-!/*.js
+!*/
+!*.html
+!*.css
+!*.js
 !.gitignore
 !data/*
 
+*.swp
