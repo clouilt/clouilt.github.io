@@ -4,6 +4,25 @@
 		$("#main").html(getAvatar());
 	}
 
+	function save(){
+		var svgXml = $('#inner').html();
+
+		var image = new Image();
+		image.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXml))); 
+
+		var canvas = document.createElement('canvas');  
+		canvas.width = $('#inner svg').width();
+		canvas.height = $('#inner svg').height();
+
+		var context = canvas.getContext('2d');  
+		context.drawImage(image, 0, 0);
+
+		var a = document.createElement('a');
+		a.href = canvas.toDataURL('image/png');  
+		a.download = "avatar.png";  
+		a.click();
+	}
+
 	function isBlack(x, y){
 		if (x > 2)
 			return black[4-x][y];
@@ -25,11 +44,11 @@
 		}
 	}
 
-	var svgPre = ' <div class=""> <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="200" width="200"> <symbol id="r0"> <rect width="20%" height="20%" style="fill:rgb(19,2,73);stroke=width:0;" /> </symbol> <symbol id="r1"> <rect width="20%" height="20%" style="fill:rgb(255,255,255);stroke=width:0;" /> </symbol>'
-	var svgPost = "</svg></div>"
+	var svgPre = ' <div id="inner" class="w3-card-4"> <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="200" width="200"> <symbol id="r0"> <rect width="40" height="40" style="fill:rgb(19,2,73);stroke=width:0;" /> </symbol> <symbol id="r1"> <rect width="40" height="40" style="fill:rgb(255,255,255);stroke=width:0;" /> </symbol>'
+	var svgPost = '</svg></div><br /><br /><div class="w3-card-4 w3-button" onclick="clickfunc()">Go!</div>  <div class="w3-card-4 w3-button" onclick="save()">Save</div>'
 
 	function getElem(x, y){
-		return '<use xlink:href="#r' + isBlack(x, y) + '" x="' + 20 * x + '%" y="' + 20 * y + '%" />'
+		return '<use xlink:href="#r' + isBlack(x, y) + '" x="' + 40 * x + '" y="' + 40 * y + '" />'
 	}
 	function getAvatar(){
 		var res = svgPre;
@@ -56,15 +75,19 @@
 		transform: translateY(-50%);
 	}
 
+#inner{
+	display: inline-block;
+	width: auto;
+	padding: 7px;
+}
+
 	.my {
 		-webkit-margin-before:0;
 		-webkit-margin-after :0;
 	}
 </style>
-<div class="w3-card w3-white test" onclick="clickfunc()">
+<div class="w3-card w3-white test" onclick="">
 <div id="main" class="w3-center">
-<div class="w3-animate-right">
-<h1 class="my"> click me </h1>
-</div>
+<div class="w3-card-4 w3-button" id="btn" onclick="clickfunc()">Go!</div>
 </div>
 </div>
