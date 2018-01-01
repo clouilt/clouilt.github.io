@@ -80,11 +80,10 @@
 	min-width: 7cm;
 }
 
-	.my {
-		-webkit-margin-before:0;
-		-webkit-margin-after :0;
-	}
 </style>
 <div id="main" >
 <div class="w3-card-4 btn btn-lg btn-primary" id="btn" onclick="clickfunc()">Go!</div>
 </div>
+<script type="text/javascript">
+	clickfunc();
+</script>

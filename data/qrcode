@@ -1,0 +1,38 @@
+<script type="text/javascript" src="./js/saveSvgAsPng.js">
+</script>
+
+<script type="text/javascript" src="./js/jquery.qrcode.min.js">
+</script>
+
+<script type="text/javascript">
+	function clickfunc(){
+		$('#qr').html("");
+		$('#qr').qrcode($('#inputtext')[0].value);
+	}
+</script>
+
+<style type="text/css">
+
+#inner{
+	margin:auto;
+	width:50%;
+}
+
+#qr{
+	text-align:center;
+}
+
+</style>
+
+
+<div>
+	<div class="input-group" id="inner">
+		<input type="text" class="form-control" placeholder="Input here" id="inputtext" onkeyup="clickfunc()">
+		<span class="input-group-btn">
+			<button class="btn btn-secondary" type="button" onclick="clickfunc()">Go!</button>
+		</span>
+	</div>
+	<br />
+	<div id='qr'>
+	</div>
+</div>
