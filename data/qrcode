@@ -4,6 +4,9 @@
 <script type="text/javascript" src="./js/jquery.qrcode.min.js">
 </script>
 
+<script type="text/javascript" src="./js/forge.min.js">
+</script>
+
 <script type="text/javascript">
 	function clickfunc(){
 		$('#qr').html("");
@@ -27,12 +30,15 @@
 
 <div>
 	<div class="input-group" id="inner">
-		<input type="text" class="form-control" placeholder="Input here" id="inputtext" onkeyup="clickfunc()">
+		<input type="text" class="form-control" placeholder="Input here" id="inputtext" onkeyup="clickfunc()" />
 		<span class="input-group-btn">
 			<button class="btn btn-secondary" type="button" onclick="clickfunc()">Go!</button>
 		</span>
 	</div>
 	<br />
 	<div id='qr'>
+	</div>
+	<br />
+	<div id='other'>
 	</div>
 </div>
