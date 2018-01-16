@@ -30,7 +30,7 @@
 
 			function refreshUsing(x, f){
 				if ( x === '' ){
-					return;
+					x = 'index';
 				}
 				var ajaxuri   = getAjaxUri(x);
 				var ajaxdata  = $.ajax({url:ajaxuri, async:false});

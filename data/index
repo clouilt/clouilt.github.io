@@ -128,8 +128,14 @@ var App = function (_React$Component) {
 ReactDOM.render(React.createElement(App), document.getElementById('example'));
 </script>
 		<style type="text/css">
+			#inputtext {
+				margin-top: 7px;
+			}
+
 			#mytbl{
 				width: 50%;
+				margin: auto;
+				margin-top: 7px;
 			}
 			#mytbl tr td {
 				border-bottom: 1px solid ;
