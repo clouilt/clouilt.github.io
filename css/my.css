@@ -5,3 +5,8 @@ body {
 body #main {
 	text-align: center;
 }
+
+#box * {
+	margin: auto;
+	margin-top: 7px;
+}

@@ -1,10 +1,10 @@
-<script src="./js/react.production.min.js"></script>
-<script src="./js/react-dom.production.min.js"></script>
+<script src="./third/js/react.production.min.js"></script>
+<script src="./third/js/react-dom.production.min.js"></script>
 
-<script type="text/javascript" src="./js/jquery.qrcode.min.js">
+<script type="text/javascript" src="./third/js/jquery.qrcode.min.js">
 </script>
 
-<script type="text/javascript" src="./js/forge.min.js">
+<script type="text/javascript" src="./third/js/forge.min.js">
 </script>
 
 <div id="example"></div>
@@ -134,9 +134,8 @@ ReactDOM.render(React.createElement(App), document.getElementById('example'));
 
 			#mytbl{
 				width: 50%;
-				margin: auto;
-				margin-top: 7px;
 			}
+
 			#mytbl tr td {
 				border-bottom: 1px solid ;
 				word-wrap: break-word;
