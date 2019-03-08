@@ -2,7 +2,7 @@
 if (tmp === '' || tmp === undefined){
 	$("#appArea").html("<h1>no react file</h1>");
 }else{
-	require(['react', 'reactdom', tmp], function(React, ReactDOM){
+	require(['react', 'reactdom', tmp], function(React, ReactDOM, __tmp){
 		initApp(React, ReactDOM);
 	});
 }</script>
