@@ -10,3 +10,9 @@ body #main {
 	margin: auto;
 	margin-top: 7px;
 }
+
+.container {
+	margin-left: 3%;
+	margin-right: 3%;
+	width: 94%;
+}

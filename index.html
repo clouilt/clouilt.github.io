@@ -1,91 +1,98 @@
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<script type="text/javascript" src="./third/js/jquery-3.2.1.min.js">
-		</script>
-
-		<link rel="stylesheet" href="third/css/w3.css">
-		<link rel="stylesheet" href="css/my.css">
-		<link href="third/bs/css/bootstrap.min.css" rel="stylesheet">
-
-		<script type="text/javascript">
-			var AJAXFILEDIR = "data/";
-			$.ajaxSetup({ cache: false });
-	
-			function getAnchor(){
-				return window.location.hash.substr(1);
-			}
-
-			function getAjaxUri(x){
-				if (x == '')
-					return '';
-				return AJAXFILEDIR + x;
-			}
-
-			function refreshUsing(x, f){
-				if ( x === '' ){
-					x = 'index';
-				}
-				var ajaxuri   = getAjaxUri(x);
-				var ajaxdata  = $.ajax({url:ajaxuri, async:false});
-				var htmlcontent = f(ajaxdata.responseText);
-				$("#box").html(htmlcontent);
-			}
-
-			function idfunc(x){
-				return x;
-			}
-
-			function refresh(x){
-				refreshUsing(x, idfunc);
-			}
-
-			function anchorRefresh(){
-				var anchor = getAnchor();
-				refresh(anchor);
-			}
-
-			function afterReady(){
-				anchorRefresh();
-			}
-
-			$(document).ready(afterReady);
-			window.addEventListener("popstate", function(){
-				anchorRefresh();
-			});
-
-		</script>
-	</head>
-	<body>
+<html><head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-			 <a class="navbar-brand" href="#index">?</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-				 <li><a class="" href='#index'>index</a></li>
-				 <li><a class="" href='#avatar'>avatar</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-	</nav>
-	<div class="container">
-		<div id='box'> </div>
-	</div>
+<script type="text/javascript" src="./third/js/require.js">
+</script>
 
+<link rel="stylesheet" href="./third/css/w3.css">
+<link rel="stylesheet" href="./css/my.css">
+<link href="./third/bs/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="/third/bs/js/bootstrap.min.js"></script>
-</body>
-</html>
+<script type="text/javascript">
+	require.config({
+		baseUrl: ".",
+		paths:{
+			"jquery":		"./third/js/jquery-3.2.1.min",
+			"bootstrap":	"./third/bs/js/bootstrap.min",
+			"react":			"./third/js/react.production.min",
+			"reactdom":		"./third/js/react-dom.production.min",
+			"qrcode":		"./third/js/jquery.qrcode.min",
+			"forge":			"./third/js/forge.min"
+		},
+		map:{
+			"*": {
+				'css': "./third/js/css"
+			},
+		},
+	});
+	var pLeft = '';
+
+	require(["jquery"], initAjax);
+
+	function getNextParam(){
+		idx = pLeft.search("#")
+		if(idx === -1){
+			p = pLeft;
+			pLeft = "";
+		}else{
+			p = pLeft.substr(0, idx);
+			pLeft = pLeft.substr(idx + 1);
+		}
+		return p;
+	}
+
+	function getAnchor(){
+		return window.location.hash.substr(1);
+	}
+
+	function getAjaxUri(x){
+		return x;
+		if (x == '')
+			return '';
+		return AJAXFILEDIR + x;
+	}
+
+	function refreshImpl(x){
+		var extension = x.split('.').pop();
+
+		var ajaxuri	= getAjaxUri(x);
+		var ajaxdata  = $.ajax({url:ajaxuri, async:false});
+		var htmlcontent = ajaxdata.responseText;
+		$("#box").html(htmlcontent);
+	}
+
+	function refresh(x){
+		refreshImpl(x);
+	}
+
+	function anchorRefresh(){
+		pLeft = getAnchor();
+		if ( pLeft === '' ){
+			pLeft = "data/react/index.html#data/react/hash";
+		}
+
+		return refresh(getNextParam());
+	}
+
+	function afterReady(){
+		anchorRefresh();
+	}
+
+	function initAjax($){
+		$.ajaxSetup({ cache: false });
+
+		$(document).ready(afterReady);
+		window.addEventListener("popstate", function(){
+			anchorRefresh();
+		});
+
+		require(["bootstrap"]);
+	}
+
+</script></head><body><nav class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	<span class="sr-only">Toggle navigation</span>
+	<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="#data/react/index.html#data/react/hash">?</a></div><div class="navbar-collapse collapse" id="navbar"><ul class="nav navbar-nav"><li><a href="#data/react/index.html#data/react/hash">index</a></li><li><a href="#data/avatar.html">avatar</a></li><li><a href="#data/react/index.html">react</a></li></ul></div></div></nav><div class="container"><div id='box'> </div></div></body></html>
