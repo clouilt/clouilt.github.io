@@ -2,7 +2,10 @@
 if (tmp === '' || tmp === undefined){
 	$("#appArea").html("<h1>no react file</h1>");
 }else{
-	require(['react', 'reactdom', tmp], function(React, ReactDOM, __tmp){
-		initApp(React, ReactDOM);
+	console.log('before require');
+	ls = ['react', 'react-dom', 'reactstrap', tmp];
+	require(ls, function(React, ReactDOM, reactstrap){
+		initApp(React, ReactDOM, reactstrap);
 	});
+	console.log('end call async require');
 }</script>

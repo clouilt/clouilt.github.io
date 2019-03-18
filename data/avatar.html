@@ -1,9 +1,5 @@
-
-		<script type="text/javascript" src="./third/js/saveSvgAsPng.js">
-		</script>
-
-
 <script type="text/javascript">
+	//require(["./third/js/saveSvgAsPng"])
 	function clickfunc(){
 		initColor();
 		$("#main").html(getAvatar());
@@ -54,7 +50,7 @@
 	}
 
 	var svgPre = ' <div id="inner" class="w3-card-4"> <svg id="avatar" xmlns="http://www.w3.org/2000/svg" version="1.1"  width="100%" viewBox="0,0,200,200"> <symbol id="r0"> <rect width="40" height="40" style="fill:rgb(19,2,73);stroke-width:0;stroke:rgb(19,2,73);" /> </symbol> <symbol id="r1"> <rect width="40" height="40" style="fill:rgb(255,255,255);stroke-width:0;stroke:rgb(0,0,0)" /> </symbol>'
-	var svgPost = '</svg></div><br /><br /><div class="w3-card-4 btn btn-lg btn-primary" onclick="clickfunc()">Go!</div>  <div class="w3-card-4 btn btn-lg btn-primary" onclick="save()">Save</div>'
+	var svgPost = '</svg></div><br /><br /><div class="w3-card-4 btn btn-lg btn-primary" onclick="clickfunc()">Go!</div>';// <div class="w3-card-4 btn btn-lg btn-primary" onclick="save()">Save</div>'
 
 	function getElem(x, y){
 		return '<use xlink:href="#r' + isBlack(x, y) + '" x="' + 40 * x + '" y="' + 40 * y + '" />'
