@@ -8,9 +8,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function initApp(React, ReactDOM, reactstrap) {
-	var Button = reactstrap.Button;
-	console.log(reactstrap);
+function initApp(React, ReactDOM, rs) {
+	//console.log(rs);
+	//var Button = rs.Button;
 	require(["forge", "qrcode", "css!./data/react/hash.css"], function (forge, qrcode) {
 		var App = function (_React$Component) {
 			_inherits(App, _React$Component);
@@ -43,7 +43,7 @@ function initApp(React, ReactDOM, reactstrap) {
 						null,
 						React.createElement("textarea", { "class": "form-control", placeholder: "Input here", id: "inputtext", value: this.state.textvalue, onChange: this.textChanged }),
 						React.createElement(
-							Button,
+							rs.Button,
 							{ color: "danger" },
 							" ",
 							this.state.textvalue
@@ -58,3 +58,7 @@ function initApp(React, ReactDOM, reactstrap) {
 		ReactDOM.render(React.createElement(App), document.getElementById('appArea'));
 	}); // require
 }
+
+define(function () {
+	return { initApp: initApp };
+});

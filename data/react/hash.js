@@ -118,3 +118,7 @@ function initApp(React, ReactDOM) {
 		ReactDOM.render(React.createElement(App), document.getElementById('appArea'));
 	}); // require
 }
+
+define(function () {
+	return { initApp: initApp };
+});
