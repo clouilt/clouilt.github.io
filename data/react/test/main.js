@@ -21,7 +21,9 @@ function initApp(React, ReactDOM, rs) {
 				var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 				_this.state = {
-					textvalue: "default"
+					curColumn: 1,
+					curRow: 1,
+					lsa: [[0]]
 				};
 				_this.textChanged = _this.textChanged.bind(_this);
 				return _this;
@@ -29,10 +31,38 @@ function initApp(React, ReactDOM, rs) {
 
 			_createClass(App, [{
 				key: "textChanged",
-				value: function textChanged(event) {
+				value: function textChanged(x, y, event) {
 					var value = event.target.value;
-					this.setState({
-						textvalue: value
+					this.setState(function (oldstate) {
+						oldstate.lsa[x][y] = value;
+						return { lsa: oldstate.lsa };
+					});
+				}
+			}, {
+				key: "addRow",
+				value: function addRow(evt) {
+					this.setState(function (oldstate) {
+						var tmp = Array(oldstate.curColumn).fill(0);
+						//for (var i = 0; i < oldstate.curColumn; ++i)
+						//tmp.push(0);
+						oldstate.lsa.push(tmp);
+						return {
+							lsa: oldstate.lsa,
+							curRow: oldstate.curRow + 1
+						};
+					});
+				}
+			}, {
+				key: "addColumn",
+				value: function addColumn(evt) {
+					this.setState(function (oldstate) {
+						var tmp = oldstate.lsa;
+						for (var i = 0; i < oldstate.curRow; ++i) {
+							tmp[i].push(0);
+						}return {
+							lsa: tmp,
+							curColumn: oldstate.curColumn + 1
+						};
 					});
 				}
 			}, {
@@ -41,12 +71,36 @@ function initApp(React, ReactDOM, rs) {
 					return React.createElement(
 						"div",
 						null,
-						React.createElement("textarea", { "class": "form-control", placeholder: "Input here", id: "inputtext", value: this.state.textvalue, onChange: this.textChanged }),
 						React.createElement(
-							rs.Button,
-							{ color: "danger" },
-							" ",
-							this.state.textvalue
+							"div",
+							null,
+							React.createElement(
+								rs.Button,
+								{ color: "danger", onClick: this.addRow.bind(this) },
+								" Add Row"
+							),
+							React.createElement(
+								rs.Button,
+								{ color: "danger", onClick: this.addColumn.bind(this) },
+								"Add Column"
+							)
+						),
+						React.createElement(
+							rs.Table,
+							{ hover: true },
+							this.state.lsa.map(function (x, i) {
+								return React.createElement(
+									"tr",
+									null,
+									x.map(function (xx, ii) {
+										return React.createElement(
+											"td",
+											null,
+											React.createElement("input", { value: xx, onChange: this.textChanged.bind(this, i, ii) })
+										);
+									}.bind(this))
+								);
+							}.bind(this))
 						)
 					);
 				}
