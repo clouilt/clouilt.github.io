@@ -11,7 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function initApp(React, ReactDOM, rs) {
 	//console.log(rs);
 	//var Button = rs.Button;
-	require(["forge", "qrcode", "css!./data/react/hash.css"], function (forge, qrcode) {
+	require(["forge", "qrcode"], function (forge, qrcode) {
 		var App = function (_React$Component) {
 			_inherits(App, _React$Component);
 

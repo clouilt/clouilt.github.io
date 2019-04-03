@@ -9,7 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function initApp(React, ReactDOM) {
-	require(["forge", "qrcode", "css!./data/react/hash.css"], function (forge, qrcode) {
+	require(["forge", "qrcode"], function (forge, qrcode) {
 		function getHash(name, text) {
 			var md = eval('forge.md.' + name + '.create();');
 			md.update(text);
@@ -51,7 +51,8 @@ function initApp(React, ReactDOM) {
 						textvalue: value
 					});
 					$('#qr').html('');
-					$('#qr').qrcode(this.state.textvalue);
+					//console.log(value);
+					$('#qr').qrcode(value);
 				}
 			}, {
 				key: "render",
@@ -60,52 +61,58 @@ function initApp(React, ReactDOM) {
 
 					return React.createElement(
 						"div",
-						null,
-						React.createElement("textarea", { "class": "form-control", placeholder: "Input here", id: "inputtext", value: this.state.textvalue, onChange: this.textChanged }),
+						{ "class": "d-flex" },
 						React.createElement(
-							"table",
-							{ id: "mytbl" },
+							"div",
+							{ "class": "p-2 myflex myfillall" },
+							React.createElement("textarea", { "class": "form-control myfillall", placeholder: "Input here", id: "inputtext", value: this.state.textvalue, onChange: this.textChanged })
+						),
+						React.createElement(
+							"div",
+							{ "class": "p-2 myflex myfillall" },
 							React.createElement(
-								"tr",
-								null,
+								"table",
+								{ "class": "myfillall" },
 								React.createElement(
-									"td",
-									null,
-									"raw"
-								),
-								React.createElement(
-									"td",
-									null,
-									this.state.textvalue,
-									" "
-								)
-							),
-							fls.map(function (x) {
-								return React.createElement(
 									"tr",
 									null,
 									React.createElement(
 										"td",
 										null,
-										x
+										"raw"
 									),
-									" ",
 									React.createElement(
 										"td",
 										null,
-										getHash(x, _this2.state.textvalue)
+										this.state.textvalue
 									)
-								);
-							}),
-							React.createElement(
-								"tr",
-								null,
-								React.createElement(
-									"td",
-									null,
-									"qrcode"
 								),
-								React.createElement("td", { id: "qr" })
+								fls.map(function (x) {
+									return React.createElement(
+										"tr",
+										null,
+										React.createElement(
+											"td",
+											null,
+											x
+										),
+										React.createElement(
+											"td",
+											{ "class": "mytext" },
+											getHash(x, _this2.state.textvalue)
+										)
+									);
+								}),
+								React.createElement(
+									"tr",
+									null,
+									React.createElement(
+										"td",
+										null,
+										"qrcode"
+									),
+									React.createElement("td", { id: "qr" })
+								)
 							)
 						)
 					);

@@ -27,11 +27,13 @@
 		},
 		map:{
 			"*": {
-				'css': "./third/js/css"
+				'css': "./third/js/css",
+				'popper.js': 'popper',
 			},
 		},
 	});
 	var pLeft = '';
+	var gCurDir = '';
 
 	require(["jquery"], initAjax);
 
@@ -44,6 +46,8 @@
 			p = pLeft.substr(0, idx);
 			pLeft = pLeft.substr(idx + 1);
 		}
+		idx_slash = p.lastIndexOf("/");
+		gCurDir = p.substr(0, idx_slash + 1);
 		return p;
 	}
 
@@ -74,7 +78,7 @@
 	function anchorRefresh(){
 		pLeft = getAnchor();
 		if ( pLeft === '' ){
-			pLeft = "data/react/index.html#data/react/hash";
+			pLeft = "data/react/index.html#hash";
 		}
 
 		return refresh(getNextParam());
@@ -95,8 +99,4 @@
 		require(["bootstrap"]);
 	}
 
-</script></head><body><nav class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	<span class="sr-only">Toggle navigation</span>
-	<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="#data/react/index.html#data/react/hash">?</a></div><div class="navbar-collapse collapse" id="navbar"><ul class="nav navbar-nav"><li><a href="#data/react/index.html#data/react/hash">index</a></li><li><a href="#data/avatar.html">avatar</a></li><li><a href="#data/react/index.html">react</a></li><li><a href="#data/react/index.html#data/react/test/main">react</a></li></ul></div></div></nav><div class="container"><div id='box'> </div></div></body></html>
+</script></head><body><nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top"><a class="navbar-brand" href="#">Logo</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="collapsibleNavbar"><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="#data/react/index.html#hash">index</a></li><li class="nav-item"><a class="nav-link" href="#data/avatar.html">avatar</a></li><li class="nav-item"><a class="nav-link" href="#data/react/index.html">react</a></li><li class="nav-item"><a class="nav-link" href="#data/react/index.html#test/main">react</a></li></ul></div></nav><div class="container"><div id='box'> </div></div></body></html>

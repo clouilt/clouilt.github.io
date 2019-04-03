@@ -5,14 +5,18 @@ body {
 body #main {
 	text-align: center;
 }
-
-#box * {
-	margin: auto;
-	margin-top: 7px;
+.container {
+}
+.myflex {
+	flex: 1 1 0;
 }
 
-.container {
-	margin-left: 3%;
-	margin-right: 3%;
-	width: 94%;
+.mytext {
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.myfillall {
+	height: 100%;
+	width: 100%;
 }

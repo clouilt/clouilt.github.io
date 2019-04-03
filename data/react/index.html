@@ -1,5 +1,6 @@
-<div id="appArea"></div><script type="text/javascript">tmp = pLeft;
-if (tmp === '' || tmp === undefined){
+<div id="appArea"></div><script type="text/javascript">tmp = gCurDir + pLeft;
+//console.log(tmp);
+if (pLeft === '' || pLeft === undefined){
 	$("#appArea").html("<h1>no react file</h1>");
 }else{
 	//console.log('before require');
