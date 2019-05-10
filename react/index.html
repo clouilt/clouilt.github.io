@@ -1,0 +1,12 @@
+<div id="appArea"></div><script type="text/javascript">tmp = gCurDir + pLeft;
+//console.log(tmp);
+if (pLeft === '' || pLeft === undefined){
+	$("#appArea").html("<h1>no react file</h1>");
+}else{
+	//console.log('before require');
+	require(['react', 'react-dom', 'reactstrap', tmp], function(React, ReactDOM, ReactStrap, tmp){
+		//console.log(tmp);
+		tmp.initApp(React, ReactDOM, ReactStrap);
+	});
+	//console.log('end call async require');
+}</script>
