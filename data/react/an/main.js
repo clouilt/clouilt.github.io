@@ -8,18 +8,33 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function getJSON(_url) {
+	var ajaxdata = $.ajax({ url: _url, async: false });
+	var jsontxt = ajaxdata.responseText;
+	return JSON.parse(jsontxt);
+}
+
+function safeGet(m, a) {
+	if (m[a] === undefined) {
+		return {};
+	}
+	return m[a];
+}
+
 function initApp(React, ReactDOM) {
 	require([], function () {
 		var data = [];
-		var jsonurl = './json/handbook_info_table.json';
-		var ajaxdata = $.ajax({ url: jsonurl, async: false });
-		var jsontxt = ajaxdata.responseText;
-		var obj_ = JSON.parse(jsontxt);
+		var handbookurl = './json/handbook_info_table.json';
+		var handbook_ = getJSON(handbookurl);
 
-		var obj = obj_['handbookDict'];
-		var keys = Object.keys(obj);
+		var charurl = './json/character_table.json';
+		var chartable = getJSON(charurl);
+
+		var handbook = handbook_['handbookDict'];
+		var keys = Object.keys(handbook);
 		keys.sort();
 		console.log(keys);
+		console.log(Object.keys(chartable));
 
 		var columns = [{
 			Header: "hash function",
@@ -56,17 +71,38 @@ function initApp(React, ReactDOM) {
 									{ 'class': 'p-2 mt-2 border media' },
 									React.createElement(
 										'div',
-										{ 'class': 'mr-3 userinfo' },
+										{ 'class': 'mr-3 leftinfo' },
 										React.createElement(
 											'p',
 											null,
-											obj[x]['charID']
+											handbook[x]['charID']
+										),
+										React.createElement(
+											'p',
+											null,
+											safeGet(chartable, [handbook[x]['charID']])['name']
+										),
+										React.createElement('hr', null),
+										React.createElement(
+											'p',
+											null,
+											safeGet(chartable, [handbook[x]['charID']])['description']
+										),
+										React.createElement(
+											'p',
+											null,
+											safeGet(chartable, [handbook[x]['charID']])['itemUsage']
+										),
+										React.createElement(
+											'p',
+											null,
+											safeGet(chartable, [handbook[x]['charID']])['itemDesc']
 										)
 									),
 									React.createElement(
 										'div',
 										{ 'class': 'media-body content' },
-										obj[x]['storyTextAudio'].map(function (xx) {
+										handbook[x]['storyTextAudio'].map(function (xx) {
 											return React.createElement(
 												'div',
 												null,
