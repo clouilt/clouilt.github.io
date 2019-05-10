@@ -38,6 +38,21 @@ function initApp(React, ReactDOM) {
 					});
 				}
 			}, {
+				key: 'setBuilding',
+				value: function setBuilding(building) {
+					var charBuildingSkills = building['chars'];
+					var buildingSkills = building['buffs'];
+					var k = Object.keys(charBuildingSkills);
+					k.sort();
+					this.setState({
+						buildingSkills: buildingSkills
+					});
+					this.setState({
+						charBSkills: charBuildingSkills,
+						keys: k
+					});
+				}
+			}, {
 				key: 'sethandbook',
 				value: function sethandbook(handbook) {
 					var hb = handbook['handbookDict'];
@@ -55,14 +70,15 @@ function initApp(React, ReactDOM) {
 
 				var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-				var handbookurl = './json/handbook_info_table.json';
-				var handbook_ = getJSON(handbookurl, _this.sethandbook.bind(_this));
+				var building = './json/building_data.json';
+				var handbook_ = getJSON(building, _this.setBuilding.bind(_this));
 
 				var charurl = './json/character_table.json';
 				var chartable = getJSON(charurl, _this.setchartable.bind(_this));
 				_this.state = {
 					keys: [],
-					handbook: [],
+					charBSkills: {},
+					buildingSkills: {},
 					chartable: {}
 				};
 				return _this;
@@ -89,52 +105,47 @@ function initApp(React, ReactDOM) {
 										React.createElement(
 											'p',
 											null,
-											_this2.state.handbook[x]['charID']
+											x
 										),
 										React.createElement(
 											'p',
 											null,
-											safeGet(_this2.state.chartable, [_this2.state.handbook[x]['charID']])['name']
+											safeGet(_this2.state.chartable, x)['name']
 										),
 										React.createElement('hr', null),
 										React.createElement(
 											'p',
 											null,
-											safeGet(_this2.state.chartable, [_this2.state.handbook[x]['charID']])['description']
-										),
-										React.createElement(
-											'p',
-											null,
-											safeGet(_this2.state.chartable, [_this2.state.handbook[x]['charID']])['itemUsage']
-										),
-										React.createElement(
-											'p',
-											null,
-											safeGet(_this2.state.chartable, [_this2.state.handbook[x]['charID']])['itemDesc']
+											safeGet(_this2.state.chartable, x)['itemUsage']
 										)
 									),
 									React.createElement(
 										'div',
 										{ 'class': 'media-body content' },
-										_this2.state.handbook[x]['storyTextAudio'].map(function (xx) {
+										_this2.state.charBSkills[x]['buffChar'].map(function (xx) {
 											return React.createElement(
 												'div',
 												null,
-												React.createElement(
-													'p',
-													null,
-													xx['storyTitle']
-												),
-												xx['stories'].map(function (xxx) {
+												xx['buffData'].map(function (xxx) {
 													return React.createElement(
-														'p',
+														'div',
 														null,
-														xxx['storyText']
+														React.createElement(
+															'p',
+															null,
+															safeGet(this.state.buildingSkills, xxx['buffId'])['buffName'],
+															' ',
+															JSON.stringify(xxx['cond'])
+														),
+														React.createElement(
+															'p',
+															null,
+															safeGet(this.state.buildingSkills, xxx['buffId'])['description']
+														)
 													);
-												}),
-												React.createElement('hr', null)
+												}.bind(this))
 											);
-										})
+										}.bind(_this2))
 									)
 								);
 							})
