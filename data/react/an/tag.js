@@ -64,6 +64,16 @@ function initApp(React, ReactDOM) {
 					});
 				}
 			}, {
+				key: 'flip',
+				value: function flip() {
+					var ls = this.state.btnls;
+					for (var i = 0; i < ls.length; ++i) {
+						ls[i][1] = !ls[i][1];
+					}this.setState({
+						btnls: ls
+					});
+				}
+			}, {
 				key: 'GO',
 				value: function GO() {
 					var tmp = toLs(this.state.btnls);
@@ -119,17 +129,43 @@ function initApp(React, ReactDOM) {
 						React.createElement('hr', null),
 						React.createElement(
 							'button',
+							{ type: 'button', onClick: this.flip.bind(this) },
+							' Flip '
+						),
+						React.createElement(
+							'button',
 							{ type: 'button', onClick: this.GO.bind(this) },
 							' GO '
 						),
 						React.createElement('hr', null),
-						this.state.res.map(function (x, i) {
-							return React.createElement(
-								'p',
-								null,
-								String(x)
-							);
-						})
+						React.createElement(
+							'ul',
+							{ 'class': 'p-2 myflex list-group' },
+							this.state.res.map(function (x, i) {
+								return React.createElement(
+									'li',
+									{ 'class': 'p-2 mt-2 border media' },
+									React.createElement(
+										'div',
+										{ 'class': 'mr-3 leftinfo' },
+										React.createElement(
+											'p',
+											null,
+											String(x[0])
+										)
+									),
+									React.createElement(
+										'div',
+										{ 'class': 'media-body content' },
+										React.createElement(
+											'p',
+											null,
+											String(x[1])
+										)
+									)
+								);
+							})
+						)
 					);
 				}
 			}]);
