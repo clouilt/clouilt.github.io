@@ -92,6 +92,13 @@ function initApp(React, ReactDOM) {
 						res: res
 					});
 				}
+			}, {
+				key: 'setCharac',
+				value: function setCharac(val) {
+					this.setState({
+						charac: val
+					});
+				}
 			}]);
 
 			function App(props) {
@@ -101,8 +108,12 @@ function initApp(React, ReactDOM) {
 
 				_this.state = {
 					btnls: [['男', false], ['女', false], ['远程位', false], ['近战位', false], ['近卫干员', false], ['术士干员', false], ['先锋干员', false], ['医疗干员', false], ['特种干员', false], ['重装干员', false], ['辅助干员', false], ['狙击干员', false], ['新手', false], ['召唤', false], ['削弱', false], ['防护', false], ['爆发', false], ['快速复活', false], ['生存', false], ['费用回复', false], ['治疗', false], ['群攻', false], ['输出', false], ['减速', false], ['位移', false], ['支援', false], ['控场', false]],
-					res: []
+					res: [],
+					charac: {}
 				};
+
+				var charurl = "./preprocessed/character.json";
+				var charinfo = getJSON(charurl, _this.setCharac.bind(_this));
 				return _this;
 			}
 
@@ -149,7 +160,7 @@ function initApp(React, ReactDOM) {
 										'div',
 										{ 'class': 'mr-3 leftinfo' },
 										React.createElement(
-											'p',
+											'h4',
 											null,
 											String(x[0])
 										)
@@ -157,11 +168,27 @@ function initApp(React, ReactDOM) {
 									React.createElement(
 										'div',
 										{ 'class': 'media-body content' },
-										React.createElement(
-											'p',
-											null,
-											String(x[1])
-										)
+										x[1].map(function (xx, ii) {
+											return React.createElement(
+												'h4',
+												{ 'class': '' },
+												React.createElement(
+													'span',
+													null,
+													String(xx[0])
+												),
+												React.createElement(
+													'span',
+													{ 'class': 'badge badge-primary' },
+													String(_this2.state.charac[xx[0]]['rarity'])
+												),
+												React.createElement(
+													'span',
+													{ 'class': 'badge badge-success' },
+													String(_this2.state.charac[xx[0]]['tagList'])
+												)
+											);
+										})
 									)
 								);
 							})
