@@ -6,5 +6,6 @@
 !.gitignore
 !data/*
 !json/*
+!preprocessed/*
 
 *.swp
