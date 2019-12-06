@@ -1,0 +1,24 @@
+<script src="third/js/libphonenumber-demo-compiled.js"></script>
+<h2>Phone Number Parser Demo</h2>
+
+<form>
+  <p>
+  Specify a Phone Number:
+  <input type="text" name="phoneNumber" id="phoneNumber" size="25" />
+  </p>
+  <p>
+  Specify a Default Country:
+  <input type="text" name="defaultCountry" id="defaultCountry" size="2" />
+  (CLDR two-letter region code)
+  </p>
+  <p>
+  Specify a Carrier Code:
+  <input type="text" name="carrierCode" id="carrierCode" size="2" />
+  (optional, only valid for some countries)
+  </p>
+  <input type="submit" value="Submit" onclick="return phoneNumberParser();" />
+  <input type="reset" value="Reset" />
+  <p>
+  <textarea id="output" rows="30" cols="80"></textarea>
+  </p>
+</form>
