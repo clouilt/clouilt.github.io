@@ -3,9 +3,12 @@
 !*.html
 !*.css
 !*.js
+!*.mp3
+!*.ogg
 !.gitignore
 !data/*
 !json/*
 !preprocessed/*
+!audio/*
 
 *.swp
