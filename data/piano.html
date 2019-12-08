@@ -1,0 +1,114 @@
+<script type="text/javascript">
+	require(['toneui'], function(tui){
+		var piano = new Tone.Sampler({
+			"A0" : "A0.[mp3|ogg]",
+			"C1" : "C1.[mp3|ogg]",
+			"D#1" : "Ds1.[mp3|ogg]",
+			"F#1" : "Fs1.[mp3|ogg]",
+			"A1" : "A1.[mp3|ogg]",
+			"C2" : "C2.[mp3|ogg]",
+			"D#2" : "Ds2.[mp3|ogg]",
+			"F#2" : "Fs2.[mp3|ogg]",
+			"A2" : "A2.[mp3|ogg]",
+			"C3" : "C3.[mp3|ogg]",
+			"D#3" : "Ds3.[mp3|ogg]",
+			"F#3" : "Fs3.[mp3|ogg]",
+			"A3" : "A3.[mp3|ogg]",
+			"C4" : "C4.[mp3|ogg]",
+			"D#4" : "Ds4.[mp3|ogg]",
+			"F#4" : "Fs4.[mp3|ogg]",
+			"A4" : "A4.[mp3|ogg]",
+			"C5" : "C5.[mp3|ogg]",
+			"D#5" : "Ds5.[mp3|ogg]",
+			"F#5" : "Fs5.[mp3|ogg]",
+			"A5" : "A5.[mp3|ogg]",
+			"C6" : "C6.[mp3|ogg]",
+			"D#6" : "Ds6.[mp3|ogg]",
+			"F#6" : "Fs6.[mp3|ogg]",
+			"A6" : "A6.[mp3|ogg]",
+			"C7" : "C7.[mp3|ogg]",
+			"D#7" : "Ds7.[mp3|ogg]",
+			"F#7" : "Fs7.[mp3|ogg]",
+			"A7" : "A7.[mp3|ogg]",
+			"C8" : "C8.[mp3|ogg]"
+		}, {
+			"release" : 1,
+			"baseUrl" : "./audio/salamander/"
+		}).toMaster();
+
+		//bind the interface
+		document.querySelector("tone-piano").bind(piano);
+		function buttonClick(){
+			var ta = document.querySelector("#keysetting");
+			var obj = JSON.parse(ta.value);
+
+			var keyb = document.querySelector("tone-piano").keyboard;
+			keyb.clearKeyboard();
+			keyb.setKeyboard(obj);
+		}
+
+		// init
+		var base = 60
+		var tmp = {
+			1: {
+				root: base + 12,
+				188: base - 12 + 0, // comma
+				190: base - 12 + 2, // dot
+				191: base - 12 + 4, // slash
+				"K": base - 12 + 5, 
+				"L": base - 12 + 7,
+				186 : base - 12 + 9, // semicolon
+				222 : base - 12 + 11, // quoto
+
+				'Z':  base + 0,
+				'S':  base + 1,
+				'X':  base + 2,
+				'D':  base + 3,
+				'C':  base + 4,
+				'V':  base + 5,
+				'G':  base + 6,
+				'B':  base + 7,
+				'H':  base + 8,
+				'N':  base + 9,
+				'J':  base + 10,
+				'M':  base + 11,
+
+				'Q':  base + 12 + 0,
+				'2':  base + 12 + 1,
+				'W':  base + 12 + 2,
+				'3':  base + 12 + 3,
+				'E':  base + 12 + 4,
+				'R':  base + 12 + 5,
+				'5':  base + 12 + 6,
+				'T':  base + 12 + 7,
+				'6':  base + 12 + 8,
+				'Y':  base + 12 + 9,
+				'7':  base + 12 + 10,
+				'U':  base + 12 + 11,
+
+				'I':  base + 12 * 2 + 0,
+				'9':  base + 12 * 2 + 1,
+				'O':  base + 12 * 2 + 2,
+				'0':  base + 12 * 2 + 3,
+				'P':  base + 12 * 2 + 4,
+			}
+		}
+		var ta = document.querySelector("#keysetting");
+		ta.value = JSON.stringify(tmp);
+	})
+</script>
+
+<style>
+	tone-piano {
+		margin-bottom: 10px;
+	}
+	#keysetting{
+		width:  618px;
+		height: 382px;
+	}
+</style>
+<tone-piano polyphonic></tone-piano>
+<textarea id='keysetting'></textarea>
+<br />
+<input  id="button" type="button" value="change key" onclick="buttonClick();" />
+

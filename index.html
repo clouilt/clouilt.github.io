@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+<script type="text/javascript" src="./third/js/Tone.js">
+</script>
 <script type="text/javascript" src="./third/js/require.js">
 </script>
 
@@ -24,12 +26,19 @@
 			"react-popper":			"./third/js/index.umd",
 			"popper":			"./third/js/popper.min",
 			"react-transition-group/Transition":			"./third/js/react-transition-group",
+			"tone":			"./third/js/Tone",
+			"toneui":			"./js/tonejs-ui",
 		},
 		map:{
 			"*": {
 				'css': "./third/js/css",
 				'popper.js': 'popper',
 			},
+		},
+		shim:{
+			"toneui": {
+				//"deps": ["tone"],
+			}
 		},
 	});
 	var pLeft = '';
