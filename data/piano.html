@@ -1,4 +1,14 @@
 <script type="text/javascript">
+	function buttonClick(){
+		var ta = document.querySelector("#keysetting");
+		var obj = JSON.parse(ta.value);
+
+		var keyb = document.querySelector("tone-piano").keyboard;
+		keyb.clearKeyboard();
+		keyb.setKeyboard(obj);
+	}
+
+
 	require(['toneui'], function(tui){
 		var piano = new Tone.Sampler({
 			"A0" : "A0.[mp3|ogg]",
@@ -38,15 +48,6 @@
 
 		//bind the interface
 		document.querySelector("tone-piano").bind(piano);
-		function buttonClick(){
-			var ta = document.querySelector("#keysetting");
-			var obj = JSON.parse(ta.value);
-
-			var keyb = document.querySelector("tone-piano").keyboard;
-			keyb.clearKeyboard();
-			keyb.setKeyboard(obj);
-		}
-
 		// init
 		var base = 60
 		var tmp = {
